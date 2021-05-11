@@ -23,11 +23,10 @@
 		"js": "npm run js:unminified && npm run js:minified",
 		"js:unminified": "for f in $npm_package_assets_js_src**/*.js; do relative=$(realpath --relative-to=\"$npm_package_assets_js_src\" \"$f\"); file=${f%.js}; mkdir -p \"${npm_package_assets_js_out}$(dirname $relative)\"; cp -f \"$f\" \"${npm_package_assets_js_out}${relative}\"; done",
 		"js:minified": "for f in $npm_package_assets_js_out**/*.js; do relative=$(realpath --relative-to=\"$npm_package_assets_js_out\" \"$f\"); file=\"${npm_package_assets_js_out}${relative}\"; file=\"${file%.js}\"; uglifyjs $f -c -m --output $file.min.js; done",
-		"blocks": "if [ -f \"block.json\" ]; then wp-scripts build; fi;",
+		"build": "concurrently \"npm:sass\" \"npm:js\"",
 		"watch": "concurrently \"npm:watch:*\"",
 		"watch:css": "chokidar \"${npm_package_assets_css_src}**/*.scss\" -c \"npm run sass\"",
-		"watch:js": "chokidar \"${npm_package_assets_js_src}**/*.js\" -c \"npm run js\"",
-		"build": "npm run sass && npm run js && npm run blocks"
+		"watch:js": "chokidar \"${npm_package_assets_js_src}**/*.js\" -c \"npm run js\""
 	},
 	"devDependencies": {
 		"autoprefixer": "^10.2.5",
