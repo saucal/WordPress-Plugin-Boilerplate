@@ -1,0 +1,37 @@
+{
+	"name": "plugin-name",
+	"version": "1.0.0",
+	"description": "This is a short description of what the plugin does.",
+	"author": "SAU/CAL",
+	"license": "GPL-2.0-or-later",
+	"assets": {
+		"js": {
+			"src": "assets/source/js/",
+			"out": "assets/js/"
+		},
+		"css": {
+			"src": "assets/source/sass/",
+			"out": "assets/css/"
+		}
+	},
+	"scripts": {
+		"presass": "rm -rf \"${npm_package_assets_css_out}\"",
+		"sass": "npm run sass:unminified && npm run sass:minified",
+		"sass:unminified": "sass --no-source-map --style=expanded \"${npm_package_assets_css_src}:${npm_package_assets_css_out}\" && postcss \"${npm_package_assets_css_out}\" --base \"${npm_package_assets_css_out}\" --dir \"${npm_package_assets_css_out}\" --no-map --use autoprefixer",
+		"sass:minified": "postcss \"${npm_package_assets_css_out}\" --base \"${npm_package_assets_css_out}\" --dir \"${npm_package_assets_css_out}\" --no-map --use postcss-clean --ext '.min.css'",
+		"prejs": "rm -rf \"${npm_package_assets_js_out}\"",
+		"js": "npm run js:unminified && npm run js:minified",
+		"js:unminified": "for f in $npm_package_assets_js_src**/*.js; do relative=$(realpath --relative-to=\"$npm_package_assets_js_src\" \"$f\"); file=${f%.js}; mkdir -p \"${npm_package_assets_js_out}$(dirname $relative)\"; cp -f \"$f\" \"${npm_package_assets_js_out}${relative}\"; done",
+		"js:minified": "for f in $npm_package_assets_js_out**/*.js; do relative=$(realpath --relative-to=\"$npm_package_assets_js_out\" \"$f\"); file=\"${npm_package_assets_js_out}${relative}\"; file=\"${file%.js}\"; uglifyjs $f -c -m --output $file.min.js; done",
+		"blocks": "if [ -f \"block.json\" ]; then wp-scripts build; fi;",
+		"build": "npm run sass && npm run js && npm run blocks"
+	},
+	"devDependencies": {
+		"autoprefixer": "^10.2.5",
+		"postcss": "^8.2.14",
+		"postcss-clean": "^1.2.2",
+		"postcss-cli": "^8.3.1",
+		"sass": "^1.32.12",
+		"uglify-js": "^3.13.5"
+	}
+}
