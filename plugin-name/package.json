@@ -39,6 +39,8 @@
 	},
 	"domain": "local.test",
 	"devDependencies": {
+		"@wordpress/eslint-plugin": "^9.0.4",
+		"@wordpress/stylelint-config": "^19.0.3",
 		"autoprefixer": "^10.2.5",
 		"chokidar-cli": "^2.1.0",
 		"concurrently": "^6.0.2",
@@ -48,5 +50,23 @@
 		"postcss-cli": "^8.3.1",
 		"sass": "^1.32.12",
 		"uglify-js": "^3.13.5"
+	},
+	"eslintConfig": {
+		"extends": [
+			"plugin:@wordpress/eslint-plugin/es5"
+		],
+		"env": {
+			"browser": true,
+			"commonjs": true,
+			"node": false
+		}
+	},
+	"stylelint": {
+		"extends": [
+			"@wordpress/stylelint-config/scss"
+		],
+		"rules": {
+			"no-descending-specificity": null
+		}
 	}
 }
