@@ -4,6 +4,10 @@
 	"description": "This is a short description of what the plugin does.",
 	"author": "SAU/CAL",
 	"license": "GPL-2.0-or-later",
+	"keywords": [
+		"wordpress",
+		"wordpress plugin"
+	],
 	"assets": {
 		"js": {
 			"src": "assets/source/js/",
