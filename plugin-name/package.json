@@ -34,10 +34,8 @@
 		"watch": "concurrently \"npm:watch:*\"",
 		"watch:css": "chokidar \"${npm_package_assets_css_src}**/*.scss\" -c \"npm run sass\"",
 		"watch:js": "chokidar \"${npm_package_assets_js_src}**/*.js\" -c \"npm run js\"",
-		"browsersync:list": "echo \"$(pwd)/${npm_package_assets_css_out}**/*.css, $(pwd)/${npm_package_assets_js_out}**/*.js\"",
-		"browsersync:serve": "browser-sync start --no-open --proxy \"$npm_package_domain\" --files \"$(npm run browsersync:list --silent)\""
+		"browsersync:list": "echo \"$(pwd)/${npm_package_assets_css_out}**/*.css, $(pwd)/${npm_package_assets_js_out}**/*.js\""
 	},
-	"domain": "local.test",
 	"devDependencies": {
 		"@wordpress/eslint-plugin": "^9.0.4",
 		"@wordpress/stylelint-config": "^19.0.3",
