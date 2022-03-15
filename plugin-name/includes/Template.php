@@ -1,23 +1,22 @@
 <?php
 /**
- * Template Functions
+ * Contains template related methods.
  *
- * Functions related to templates.
- *
- * @package  Plugin_Name
- * @version  1.0.0
+ * @class       Template
+ * @version     1.0.0
+ * @package     Plugin_Name/Classes/
  */
 
 namespace Plugin_Name;
 
 if ( ! defined( 'ABSPATH' ) ) {
-	exit; // Exit if accessed directly.
+	exit;
 }
 
 /**
  * Template Class.
  */
-class Template {
+final class Template {
 
 	/**
 	 * Get template part.
@@ -28,6 +27,7 @@ class Template {
 	 * @return void
 	 */
 	public static function get_part( $slug, $name = '' ) {
+
 		$template = '';
 
 		// Look in yourtheme/slug-name.php and yourtheme/plugin-name/slug-name.php .
@@ -53,6 +53,7 @@ class Template {
 		}
 	}
 
+
 	/**
 	 * Get other templates passing attributes and including the file.
 	 *
@@ -64,6 +65,7 @@ class Template {
 	 * @return void
 	 */
 	public static function get( $template_name, $args = array(), $template_path = '', $default_path = '' ) {
+
 		if ( ! empty( $args ) && is_array( $args ) ) {
 			// phpcs:ignore WordPress.PHP.DontExtract
 			extract( $args );
@@ -79,12 +81,15 @@ class Template {
 		// Allow 3rd party plugin filter template file from their plugin.
 		$located = apply_filters( 'plugin_name_get_template', $located, $template_name, $args, $template_path, $default_path );
 
+		// Perform other actions before template part is included.
 		do_action( 'plugin_name_before_template_part', $template_name, $template_path, $located, $args );
 
 		include $located;
 
+		// Perform other actions after template part is included.
 		do_action( 'plugin_name_after_template_part', $template_name, $template_path, $located, $args );
 	}
+
 
 	/**
 	 * Like get, but returns the HTML instead of outputting.
@@ -97,12 +102,16 @@ class Template {
 	 * @return string
 	 */
 	public static function get_html( $template_name, $args = array(), $template_path = '', $default_path = '' ) {
+
 		ob_start();
+
 		self::get( $template_name, $args, $template_path, $default_path );
+
 		$ret = ob_get_clean();
 
 		return is_bool( $ret ) ? '' : $ret;
 	}
+
 
 	/**
 	 * Locate a template and return the path for inclusion.
@@ -119,6 +128,7 @@ class Template {
 	 * @return string
 	 */
 	public static function locate( $template_name, $template_path = '', $default_path = '' ) {
+
 		if ( ! $template_path ) {
 			$template_path = Utils::template_path();
 		}
@@ -143,5 +153,4 @@ class Template {
 		// Return what we found.
 		return apply_filters( 'plugin_name_locate_template', $template, $template_name, $template_path );
 	}
-
 }

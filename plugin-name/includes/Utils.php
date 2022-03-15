@@ -1,19 +1,42 @@
 <?php
 /**
- * Utility Functions
+ * Utility methods
  *
- * Functions used across the plugin that are just useful.
- *
- * @package  Plugin_Name
- * @version  1.0.0
+ * @class       Utils
+ * @version     1.0.0
+ * @package     Plugin_Name/Classes/
  */
 
 namespace Plugin_Name;
 
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
+
 /**
- * Template Class.
+ * Utils class
  */
-class Utils {
+final class Utils {
+
+	/**
+	 * What type of request is this?
+	 *
+	 * @param  string $type admin, ajax, cron or frontend.
+	 * @return bool
+	 */
+	public static function is_request( $type ) {
+
+		switch ( $type ) {
+			case 'admin':
+				return is_admin();
+			case 'ajax':
+				return defined( 'DOING_AJAX' );
+			case 'cron':
+				return defined( 'DOING_CRON' );
+			case 'frontend':
+				return ( ! is_admin() || defined( 'DOING_AJAX' ) ) && ! defined( 'DOING_CRON' );
+		}
+	}
 
 
 	/**
@@ -25,6 +48,7 @@ class Utils {
 		return untrailingslashit( plugins_url( '/', PLUGIN_FILE ) );
 	}
 
+
 	/**
 	 * Get the plugin path.
 	 *
@@ -34,14 +58,17 @@ class Utils {
 		return untrailingslashit( plugin_dir_path( PLUGIN_FILE ) );
 	}
 
+
 	/**
 	 * Get the template path.
 	 *
 	 * @return string
 	 */
 	public static function template_path() {
+		// Allow 3rd party plugin filter template path from their plugin.
 		return apply_filters( 'plugin_name_template_path', 'plugin-name/' );
 	}
+
 
 	/**
 	 * Get Ajax URL.
