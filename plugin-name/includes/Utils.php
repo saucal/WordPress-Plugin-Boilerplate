@@ -30,11 +30,11 @@ final class Utils {
 			case 'admin':
 				return is_admin();
 			case 'ajax':
-				return defined( 'DOING_AJAX' );
+				return defined( 'DOING_AJAX' ) && DOING_AJAX;
 			case 'cron':
-				return defined( 'DOING_CRON' );
+				return defined( 'DOING_CRON' ) && DOING_CRON;
 			case 'frontend':
-				return ( ! is_admin() || defined( 'DOING_AJAX' ) ) && ! defined( 'DOING_CRON' );
+				return ( ! is_admin() || ( defined( 'DOING_AJAX' ) && DOING_AJAX ) ) && ( ! defined( 'DOING_CRON' ) || ! DOING_CRON );
 		}
 	}
 

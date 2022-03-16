@@ -27,7 +27,7 @@
 /**
  * Developer note: updating minimum PHP, WordPress and WooCommerce versions.
  *
- * When updating any version metadata above and below please ensure to update updated these files:
+ * When updating any version metadata above and below please ensure to update these files:
  * - `phpcs.xml`
  */
 
@@ -73,7 +73,7 @@ if ( ! is_readable( $autoloader ) ) {
 
 	if ( defined( 'WP_DEBUG' ) && WP_DEBUG ) {
 		$mpi_error = get_error();
-		error_log( sprintf( $mpi_error['message'], '`' . $mpi_error['code'] . '`', '`' . $mpi_error['directory'] . '`' ) ); // phpcs:ignore
+		error_log( sprintf( $mpi_error['message'], '`' . $mpi_error['command'] . '`', '`' . $mpi_error['directory'] . '`' ) ); // phpcs:ignore
 	}
 
 	/**
@@ -85,7 +85,7 @@ if ( ! is_readable( $autoloader ) ) {
 			$mpi_error = get_error();
 			?>
 			<div class="notice notice-error">
-				<?php printf( $mpi_error['message'], '<code>' . $mpi_error['code'] . '</code>', '<code>' . $mpi_error['directory'] . '<code>' ); // phpcs:ignore ?>
+				<?php printf( $mpi_error['message'], '<code>' . $mpi_error['command'] . '</code>', '<code>' . $mpi_error['directory'] . '<code>' ); // phpcs:ignore ?>
 			</div>
 			<?php
 		}
