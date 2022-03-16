@@ -72,8 +72,8 @@ $autoloader = __DIR__ . '/vendor/autoload.php';
 if ( ! is_readable( $autoloader ) ) {
 
 	if ( defined( 'WP_DEBUG' ) && WP_DEBUG ) {
-		$mpi_error = get_error();
-		error_log( sprintf( $mpi_error['message'], '`' . $mpi_error['command'] . '`', '`' . $mpi_error['directory'] . '`' ) ); // phpcs:ignore
+		$composer_error = get_error();
+		error_log( sprintf( $composer_error['message'], '`' . $composer_error['command'] . '`', '`' . $composer_error['directory'] . '`' ) ); // phpcs:ignore
 	}
 
 	/**
@@ -82,10 +82,10 @@ if ( ! is_readable( $autoloader ) ) {
 	add_action(
 		'admin_notices',
 		function() {
-			$mpi_error = get_error();
+			$composer_error = get_error();
 			?>
 			<div class="notice notice-error">
-				<?php printf( $mpi_error['message'], '<code>' . $mpi_error['command'] . '</code>', '<code>' . $mpi_error['directory'] . '<code>' ); // phpcs:ignore ?>
+				<?php printf( $composer_error['message'], '<code>' . $composer_error['command'] . '</code>', '<code>' . $composer_error['directory'] . '<code>' ); // phpcs:ignore ?>
 			</div>
 			<?php
 		}
