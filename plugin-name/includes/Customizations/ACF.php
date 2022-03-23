@@ -22,7 +22,7 @@ class ACF {
 	 *
 	 * @return void
 	 */
-	public static function init() {
+	public static function hooks() {
 		// add_filter( 'acf/settings/load_json', array( __CLASS__, 'acf_json_load_point' ) );
 		// add_filter( 'acf/settings/save_json', array( __CLASS__, 'acf_json_save_point' ) );
 	}

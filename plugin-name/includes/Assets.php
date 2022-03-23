@@ -1,9 +1,10 @@
 <?php
 /**
- * Handle frontend scripts
+ * Handle scripts register and enqueue.
  *
+ * @class       Assets
  * @version     1.0.0
- * @package     Plugin_Name
+ * @package     Plugin_Name/Classes/
  */
 
 namespace Plugin_Name;
@@ -13,7 +14,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 /**
- * Generic Assets Class.
+ * Main assets class
  */
 abstract class Assets {
 
@@ -22,21 +23,22 @@ abstract class Assets {
 	 *
 	 * @var array<string>
 	 */
-	private $scripts = array();
+	private static $scripts = array();
 
 	/**
 	 * Contains an array of script handles registered by WC.
 	 *
 	 * @var array<string>
 	 */
-	private $styles = array();
+	private static $styles = array();
 
 	/**
 	 * Contains an array of script handles localized by WC.
 	 *
 	 * @var array<string>
 	 */
-	private $wp_localize_scripts = array();
+	private static $wp_localize_scripts = array();
+
 
 	/**
 	 * Tryies to localize the minified version if required and exists, otherwise load the unminified version
@@ -44,16 +46,21 @@ abstract class Assets {
 	 * @param  string $path Path of the asset to locate.
 	 * @return string
 	 */
-	protected function localize_asset( $path ) {
+	public static function localize_asset( $path ) {
+
 		$assets_path     = Utils::plugin_path() . '/assets/';
 		$assets_path_url = str_replace( array( 'http:', 'https:' ), '', Utils::plugin_url() ) . '/assets/';
 
 		if ( ! ( defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ) ) {
+
 			$ext_pos = strrpos( $path, '.' );
+
 			if ( is_numeric( $ext_pos ) ) {
+
 				$clean_path = substr( $path, 0, $ext_pos );
 				$ext        = substr( $path, $ext_pos );
 				$min_path   = $clean_path . '.min' . $ext;
+
 				if ( file_exists( $assets_path . $min_path ) ) {
 					$path = $min_path;
 				}
@@ -63,23 +70,28 @@ abstract class Assets {
 		return $assets_path_url . $path;
 	}
 
-	/**
-	 * Get styles for the frontend.
-	 *
-	 * @return array<string,array>
-	 */
-	public function get_styles() {
-		return array();
-	}
 
 	/**
 	 * Get styles for the frontend.
 	 *
 	 * @return array<string,array>
 	 */
-	public function get_scripts() {
-		return array();
+	public static function get_styles() {
+		// Allow to change the list of styles.
+		return apply_filters( 'plugin_name_enqueue_styles', array() );
 	}
+
+
+	/**
+	 * Get styles for the frontend.
+	 *
+	 * @return array<string,array>
+	 */
+	public static function get_scripts() {
+		// Allow to change the list of scripts.
+		return apply_filters( 'plugin_name_enqueue_scripts', array() );
+	}
+
 
 	/**
 	 * Register a script for use.
@@ -98,10 +110,11 @@ abstract class Assets {
 	 *
 	 * @return void
 	 */
-	private function register_script( $handle, $path, $deps = array( 'jquery' ), $version = VERSION, $in_footer = true ) {
-		$this->scripts[] = $handle;
+	private static function register_script( $handle, $path, $deps = array( 'jquery' ), $version = VERSION, $in_footer = true ) {
+		self::$scripts[] = $handle;
 		wp_register_script( $handle, $path, $deps, $version, $in_footer );
 	}
+
 
 	/**
 	 * Register and enqueue a script for use.
@@ -120,12 +133,15 @@ abstract class Assets {
 	 *
 	 * @return void
 	 */
-	private function enqueue_script( $handle, $path = '', $deps = array( 'jquery' ), $version = VERSION, $in_footer = true ) {
-		if ( ! in_array( $handle, $this->scripts, true ) && $path ) {
-			$this->register_script( $handle, $path, $deps, $version, $in_footer );
+	private static function enqueue_script( $handle, $path = '', $deps = array( 'jquery' ), $version = VERSION, $in_footer = true ) {
+
+		if ( ! in_array( $handle, self::$scripts, true ) && $path ) {
+			self::register_script( $handle, $path, $deps, $version, $in_footer );
 		}
+
 		wp_enqueue_script( $handle );
 	}
+
 
 	/**
 	 * Register a style for use.
@@ -145,10 +161,11 @@ abstract class Assets {
 	 *
 	 * @return void
 	 */
-	private function register_style( $handle, $path, $deps = array(), $version = VERSION, $media = 'all' ) {
-		$this->styles[] = $handle;
+	private static function register_style( $handle, $path, $deps = array(), $version = VERSION, $media = 'all' ) {
+		self::$styles[] = $handle;
 		wp_register_style( $handle, $path, $deps, $version, $media );
 	}
+
 
 	/**
 	 * Register and enqueue a styles for use.
@@ -168,32 +185,31 @@ abstract class Assets {
 	 *
 	 * @return void
 	 */
-	private function enqueue_style( $handle, $path = '', $deps = array(), $version = VERSION, $media = 'all' ) {
-		if ( ! in_array( $handle, $this->styles, true ) && $path ) {
-			$this->register_style( $handle, $path, $deps, $version, $media );
+	private static function enqueue_style( $handle, $path = '', $deps = array(), $version = VERSION, $media = 'all' ) {
+
+		if ( ! in_array( $handle, self::$styles, true ) && $path ) {
+			self::register_style( $handle, $path, $deps, $version, $media );
 		}
+
 		wp_enqueue_style( $handle );
 	}
+
 
 	/**
 	 * Register/queue frontend scripts.
 	 *
 	 * @return void
 	 */
-	public function load_scripts() {
-		global $post;
+	public static function load_scripts() {
 
 		if ( ! did_action( 'before_plugin_name_init' ) ) {
 			return;
 		}
 
-		$suffix               = defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ? '' : '.min';
-		$assets_path          = str_replace( array( 'http:', 'https:' ), '', Utils::plugin_url() ) . '/assets/';
-		$frontend_script_path = $assets_path . 'js/frontend/';
-
 		// JS Scripts.
-		$enqueue_scripts = $this->get_scripts();
+		$enqueue_scripts = static::get_scripts();
 		if ( $enqueue_scripts ) {
+
 			foreach ( $enqueue_scripts as $handle => $args ) {
 				$args = wp_parse_args(
 					$args,
@@ -205,17 +221,19 @@ abstract class Assets {
 						'enqueue'   => true,
 					)
 				);
+
 				if ( $args['enqueue'] ) {
-					$this->enqueue_script( $handle, $args['src'], $args['deps'], $args['version'], $args['in_footer'] );
+					self::enqueue_script( $handle, $args['src'], $args['deps'], $args['version'], $args['in_footer'] );
 				} else {
-					$this->register_script( $handle, $args['src'], $args['deps'], $args['version'], $args['in_footer'] );
+					self::register_script( $handle, $args['src'], $args['deps'], $args['version'], $args['in_footer'] );
 				}
 			}
 		}
 
 		// CSS Styles.
-		$enqueue_styles = $this->get_styles();
+		$enqueue_styles = static::get_styles();
 		if ( $enqueue_styles ) {
+
 			foreach ( $enqueue_styles as $handle => $args ) {
 				$args = wp_parse_args(
 					$args,
@@ -227,14 +245,16 @@ abstract class Assets {
 						'enqueue' => true,
 					)
 				);
+
 				if ( $args['enqueue'] ) {
-					$this->enqueue_style( $handle, $args['src'], $args['deps'], $args['version'], $args['media'] );
+					self::enqueue_style( $handle, $args['src'], $args['deps'], $args['version'], $args['media'] );
 				} else {
-					$this->register_style( $handle, $args['src'], $args['deps'], $args['version'], $args['media'] );
+					self::register_style( $handle, $args['src'], $args['deps'], $args['version'], $args['media'] );
 				}
 			}
 		}
 	}
+
 
 	/**
 	 * Localize a WC script once.
@@ -244,16 +264,20 @@ abstract class Assets {
 	 *
 	 * @return void
 	 */
-	private function localize_script( $handle ) {
-		if ( ! in_array( $handle, $this->wp_localize_scripts, true ) && wp_script_is( $handle ) ) {
-			$data = $this->get_script_data( $handle );
+	private static function localize_script( $handle ) {
+
+		if ( ! in_array( $handle, self::$wp_localize_scripts, true ) && wp_script_is( $handle ) ) {
+
+			$data = self::get_script_data( $handle );
 			if ( $data ) {
 				$name                        = str_replace( '-', '_', $handle ) . '_params';
-				$this->wp_localize_scripts[] = $handle;
+				self::$wp_localize_scripts[] = $handle;
+				// Let plugins to filter the script data.
 				wp_localize_script( $handle, $name, apply_filters( $name, $data ) );
 			}
 		}
 	}
+
 
 	/**
 	 * Return data for script handles.
@@ -261,28 +285,31 @@ abstract class Assets {
 	 * @param  string $handle Handle of the script to add data for.
 	 * @return array<string,mixed>|bool
 	 */
-	private function get_script_data( $handle ) {
-		global $wp;
+	private static function get_script_data( $handle ) {
 
-		$scripts = $this->get_scripts();
+		$scripts = self::get_scripts();
 		if ( isset( $scripts[ $handle ] ) && isset( $scripts[ $handle ]['data'] ) ) {
+
 			$data = $scripts[ $handle ]['data'];
 			if ( is_callable( $data ) ) {
 				$data = call_user_func( $data );
 			}
+
 			return $data;
 		}
+
 		return false;
 	}
+
 
 	/**
 	 * Localize scripts only when enqueued.
 	 *
 	 * @return void
 	 */
-	public function localize_printed_scripts() {
-		foreach ( $this->scripts as $handle ) {
-			$this->localize_script( $handle );
+	public static function localize_printed_scripts() {
+		foreach ( self::$scripts as $handle ) {
+			self::localize_script( $handle );
 		}
 	}
 }
