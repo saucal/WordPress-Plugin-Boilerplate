@@ -85,7 +85,7 @@ if ( ! is_readable( $autoloader ) ) {
 			$composer_error = get_error();
 			?>
 			<div class="notice notice-error">
-				<?php printf( $composer_error['message'], '<code>' . $composer_error['command'] . '</code>', '<code>' . $composer_error['directory'] . '<code>' ); // phpcs:ignore ?>
+				<?php printf( $composer_error['message'], '<code>' . $composer_error['command'] . '</code>', '<code>' . $composer_error['directory'] . '</code>' ); // phpcs:ignore ?>
 			</div>
 			<?php
 		}
