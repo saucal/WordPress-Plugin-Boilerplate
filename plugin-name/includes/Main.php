@@ -32,6 +32,8 @@ final class Main {
 	 */
 	public static function bootstrap() {
 
+		register_activation_hook( PLUGIN_FILE, array( Install::class, 'install' ) );
+
 		add_action( 'plugins_loaded', array( __CLASS__, 'load' ) );
 
 		add_action( 'init', array( __CLASS__, 'init' ) );
@@ -71,8 +73,6 @@ final class Main {
 		if ( ! self::check_plugin_requirements() ) {
 			return;
 		}
-
-		register_activation_hook( PLUGIN_FILE, array( Install::class, 'install' ) );
 
 		if ( Utils::is_request( 'admin' ) ) {
 			Admin::hooks();
