@@ -39,7 +39,7 @@ final class Main {
 		add_action( 'init', array( __CLASS__, 'init' ) );
 
 		// Perform other actions when plugin is loaded.
-		do_action( 'plugin_name_loaded' );
+		do_action( 'plugin_name_fully_loaded' );
 	}
 
 
