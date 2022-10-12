@@ -1,5 +1,6 @@
 *.log
 .htaccess
+*.zip
 
 # Ignore compiled assets
 assets/css*
