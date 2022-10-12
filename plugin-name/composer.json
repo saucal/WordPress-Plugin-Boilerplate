@@ -30,10 +30,10 @@
 	},
 	"scripts": {
 		"phpcs": [
-			"phpcs --extensions=php -s -p"
+			"phpcs . --ignore=vendor,node_modules,assets --extensions=php -s -p"
 		],
 		"phpcbf": [
-			"phpcbf -p"
+			"phpcbf . --ignore=vendor,node_modules,assets --extensions=php -p"
 		]
 	},
 	"extra": {
