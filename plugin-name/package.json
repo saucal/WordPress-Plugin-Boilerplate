@@ -8,69 +8,11 @@
 		"wordpress",
 		"wordpress plugin"
 	],
-	"assets": {
-		"js": {
-			"src": "assets/source/js/",
-			"out": "assets/js/"
+	"config": {
+		"webpack": {
+			"js": "src/js/",
+			"css": "src/sass/"
 		},
-		"css": {
-			"src": "assets/source/sass/",
-			"out": "assets/css/"
-		},
-		"pot": "i18n/languages"
-	},
-	"scripts": {
-		"presass": "rm -rf \"${npm_package_assets_css_out}\"",
-		"sass": "npm run sass:unminified && npm run sass:minified",
-		"sass:unminified": "sass --no-source-map --style=expanded \"${npm_package_assets_css_src}:${npm_package_assets_css_out}\" && postcss \"${npm_package_assets_css_out}\" --base \"${npm_package_assets_css_out}\" --dir \"${npm_package_assets_css_out}\" --no-map --use autoprefixer",
-		"sass:minified": "postcss \"${npm_package_assets_css_out}\" --base \"${npm_package_assets_css_out}\" --dir \"${npm_package_assets_css_out}\" --no-map --use postcss-clean --ext '.min.css'",
-		"prejs": "rm -rf \"${npm_package_assets_js_out}\"",
-		"js": "npm run js:unminified && npm run js:minified",
-		"js:unminified": "for f in $(find $npm_package_assets_js_src -name '*.js'); do relative=$(realpath --relative-to=\"$npm_package_assets_js_src\" \"$f\"); file=${f%.js}; mkdir -p \"${npm_package_assets_js_out}$(dirname $relative)\"; cp -f \"$f\" \"${npm_package_assets_js_out}${relative}\"; done",
-		"js:minified": "for f in $(find $npm_package_assets_js_out -name '*.js'); do relative=$(realpath --relative-to=\"$npm_package_assets_js_out\" \"$f\"); file=\"${npm_package_assets_js_out}${relative}\"; file=\"${file%.js}\"; uglifyjs $f -c -m --output $file.min.js; done",
-		"pretranslate": "rm -rf \"${npm_package_assets_pot}\"",
-		"translate": "wpi18n makepot --domain-path \"${npm_package_assets_pot}\" --pot-file plugin-name.pot --type plugin --main-file plugin-name.php --exclude node_modules,tests,docs,docker",
-		"build": "concurrently \"npm:sass\" \"npm:js\" \"npm:translate\"",
-		"watch": "concurrently \"npm:watch:*\"",
-		"watch:css": "chokidar \"${npm_package_assets_css_src}**/*.scss\" -c \"npm run sass\"",
-		"watch:js": "chokidar \"${npm_package_assets_js_src}**/*.js\" -c \"npm run js\"",
-		"browsersync:list": "echo \"$(pwd)/${npm_package_assets_css_out}**/*.css, $(pwd)/${npm_package_assets_js_out}**/*.js\""
-	},
-	"devDependencies": {
-		"@wordpress/eslint-plugin": "^9.0.4",
-		"@wordpress/stylelint-config": "^19.0.3",
-		"autoprefixer": "^10.2.5",
-		"chokidar-cli": "^2.1.0",
-		"concurrently": "^6.0.2",
-		"node-wp-i18n": "^1.2.5",
-		"postcss": "^8.2.14",
-		"postcss-clean": "^1.2.2",
-		"postcss-cli": "^8.3.1",
-		"sass": "^1.32.12",
-		"uglify-js": "^3.13.5"
-	},
-	"browserslist": [
-		"last 5 versions",
-		"> 1%",
-		"maintained node versions",
-		"not dead"
-	],
-	"eslintConfig": {
-		"extends": [
-			"plugin:@wordpress/eslint-plugin/es5"
-		],
-		"env": {
-			"browser": true,
-			"commonjs": true,
-			"node": false
-		}
-	},
-	"stylelint": {
-		"extends": [
-			"@wordpress/stylelint-config/scss"
-		],
-		"rules": {
-			"no-descending-specificity": null
-		}
+		"wp_org_slug": "plugin-name"
 	}
 }
