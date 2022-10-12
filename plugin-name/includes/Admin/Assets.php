@@ -42,7 +42,7 @@ final class Assets {
 	public static function add_styles( $styles ) {
 
 		$styles['plugin-name-admin'] = array(
-			'src' => AssetsMain::localize_asset( 'css/admin/plugin-name.css' ),
+			'src' => AssetsMain::localize_asset( 'css/admin/plugin-name-admin.css' ),
 		);
 
 		return $styles;
@@ -58,7 +58,7 @@ final class Assets {
 	public static function add_scripts( $scripts ) {
 
 		$scripts['plugin-name-admin'] = array(
-			'src'  => AssetsMain::localize_asset( 'js/admin/plugin-name.js' ),
+			'src'  => AssetsMain::localize_asset( 'js/admin/plugin-name-admin.js' ),
 			'data' => array(
 				'ajax_url' => Utils::ajax_url(),
 			),
