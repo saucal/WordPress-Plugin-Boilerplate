@@ -14,5 +14,30 @@
 			"css": "src/sass/"
 		},
 		"wp_org_slug": "plugin-name"
+	},
+	"scripts": {
+		"postinstall": "composer install",
+		"lint:php": "composer phpcs",
+		"fix:php": "composer phpcbf",
+		"lint:js": "wp-scripts lint-js ./assets/source/js",
+		"fix:js": "wp-scripts format ./assets/source/js",
+		"lint:css": "wp-scripts lint-style ./assets/source/sass",
+		"fix:css": "wp-scripts lint-style ./assets/source/sass --fix",
+		"makepot": "wpi18n makepot --domain-path=\"i18n/languages\" --pot-file=\"plugin-name.pot\" --type=\"plugin\" --main-file=\"plugin-name.php\" --exclude=\"node_modules,tests,docs,docker,vendor\"",
+		"watch": "webpack --mode=none --watch",
+		"prearchive": "rm -rf $npm_package_name.zip vendor/ node_modules/ && composer install --no-dev --optimize-autoloader && NODE_ENV=production npm install --ignore-scripts",
+		"archive": "composer archive --file=$npm_package_name --format=zip",
+		"postarchive": "rm -rf vendor/ node_modules/ && npm install",
+		"build:assets": "wp-scripts build",
+		"postbuild:assets": "rm -rf assets/css/**/*.php assets/css/**/*.js",
+		"build": "npm run makepot && npm run build:assets && npm run archive"
+	},
+	"devDependencies": {
+		"@wordpress/scripts": "^24.3.0",
+		"copy-webpack-plugin": "^11.0.0",
+		"node-wp-i18n": "^1.2.6"
+	},
+	"dependencies": {
+		"@wordpress/i18n": "^4.19.0"
 	}
 }

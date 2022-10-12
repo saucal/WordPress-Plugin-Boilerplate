@@ -11,6 +11,9 @@ node_modules
 # Ignore composer everywhere
 vendor
 
+# Ignore generated assets
+assets
+
 # Editors
 *.esproj
 *.tmproj
