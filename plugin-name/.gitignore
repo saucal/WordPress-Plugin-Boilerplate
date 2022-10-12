@@ -15,6 +15,9 @@ vendor
 # Ignore generated assets
 assets
 
+# Ignore generated pot file
+i18n/languages/*.pot
+
 # Editors
 *.esproj
 *.tmproj
