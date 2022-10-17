@@ -28,7 +28,6 @@
 		"archive": "cross-var rm -rf $npm_package_config_wp_org_slug.zip vendor/ node_modules/ && composer install --no-dev --optimize-autoloader && npm install --only=prod --ignore-scripts && composer archive --file=$npm_package_config_wp_org_slug --format=zip",
 		"postarchive": "rm -rf vendor/ node_modules/ && npm install",
 		"build:assets": "wp-scripts build",
-		"postbuild:assets": "rm -rf assets/css/**/*.php assets/css/**/*.js",
 		"build": "npm run makepot && npm run build:assets && npm run archive"
 	},
 	"devDependencies": {
