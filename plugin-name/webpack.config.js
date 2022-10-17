@@ -6,6 +6,7 @@ const MiniCSSExtractPlugin = require( 'mini-css-extract-plugin' );
 const path = require('path');
 const { fromProjectRoot } = require('@wordpress/scripts/utils/file');
 const fs = require('fs');
+const RemoveEmptyScriptsPlugin = require('webpack-remove-empty-scripts');
 
 const {
 	hasCssnanoConfig,
@@ -278,6 +279,7 @@ module.exports = {
 		],
 	},
 	plugins: [
+        new RemoveEmptyScriptsPlugin(),
 		...defaultConfig.plugins,
 		new CopyWebpackPlugin({
 			patterns: [
