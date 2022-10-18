@@ -5,7 +5,7 @@ const CopyWebpackPlugin = require( 'copy-webpack-plugin' );
 const MiniCSSExtractPlugin = require( 'mini-css-extract-plugin' );
 const path = require('path');
 const { fromProjectRoot } = require('@wordpress/scripts/utils/file');
-const fs = require('fs');
+const glob = require('glob');
 const RemoveEmptyScriptsPlugin = require('webpack-remove-empty-scripts');
 
 const {
@@ -79,44 +79,23 @@ function getWebpackEntryPoints() {
 		css: fromProjectRoot(process.env.npm_package_config_webpack_css),
 	};
 
-	for ( const entryPath in entryPaths ) {
-		// For each path of entries, find its subdirectories.
-		const dirs = fs
-				.readdirSync(entryPaths[entryPath], {
-					withFileTypes: true,
-				})
-				.filter((item) => item.isDirectory())
-				.map((item) => item.name);
-		
-		// Foreach subdirectory find files that are either .js or .scss
-		dirs.forEach((dir) => {
-			fs.readdirSync(path.resolve(
-				entryPaths[entryPath],
-				dir
-			), {
-				withFileTypes: true,
-			})
-			.filter((item) => ! item.isDirectory())
-			.map((item) => {
-				// Don't add as entries files that are not .js or .scss
-				if ( 'js' !== item.name.split('.').pop() && 'scss' !== item.name.split('.').pop() ) {
-					return item.name;
-				}
+	for ( const type in entryPaths ) {
+		var thisPath = entryPaths[type];
+		var typeFiles = glob.sync(
+			// Search for .js or .scss files that do not start with _ or .
+			path.join( thisPath, '**', type === 'js' ? '[^_.]*.js' : '[^_.]*.scss' )
+		);
+	
+		typeFiles.forEach( ( file ) => {
+			const relative = path.relative( thisPath, file );
+			const relativeOut = path.join( type, relative );
+			const entryName = relativeOut.substring(0, relativeOut.lastIndexOf('.')) || relativeOut; // remove extension
 
-				// Don't add as entries files that their names start with _ or .
-				if ( '_' === item.name.charAt( 0 ) || '.' === item.name.charAt( 0 ) ) {
-					return item.name;
-				}
+			entryPoints[ entryName ] = file;
 
-				const itemName = item.name.replace( '.js', '' ).replace('.scss', '' );
-				entryPoints[entryPath + '/' + dir + '/' + itemName] = path.resolve( entryPaths[entryPath], dir, item.name );
-
-				// Produce minified versions of the files.
-				entryPoints[entryPath + '/' + dir + '/' + itemName + '.min'] = path.resolve( entryPaths[entryPath], dir, item.name );
-
-				return item.name;
-			});
-		});
+			// Produce minified versions of the files.
+			entryPoints[ entryName + '.min' ] = file;
+		} );
 	}
 
 	return entryPoints;
