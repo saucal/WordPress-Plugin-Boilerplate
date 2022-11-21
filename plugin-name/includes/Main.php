@@ -32,7 +32,7 @@ final class Main {
 	 */
 	public static function bootstrap() {
 
-		register_activation_hook( PLUGIN_FILE, array( Install::class, 'install' ) );
+		register_activation_hook( PLUGIN_FILE, array( Install::class, 'init' ) );
 
 		add_action( 'plugins_loaded', array( __CLASS__, 'load' ) );
 
