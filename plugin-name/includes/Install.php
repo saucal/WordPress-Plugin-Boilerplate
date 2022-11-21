@@ -21,7 +21,7 @@ final class Install {
 	/**
 	 * Install action.
 	 */
-	public static function install() {
+	public static function init() {
 
 		// Perform install actions here.
 
