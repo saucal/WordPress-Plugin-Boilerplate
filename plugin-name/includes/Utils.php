@@ -65,7 +65,11 @@ final class Utils {
 	 * @return string
 	 */
 	public static function template_path() {
-		// Allow 3rd party plugin filter template path from their plugin.
+		/**
+		 * Allow 3rd party plugin filter template path from their plugin.
+		 *
+		 * @since 1.0.0
+		 */
 		return apply_filters( 'plugin_name_template_path', 'plugin-name/' );
 	}
 
