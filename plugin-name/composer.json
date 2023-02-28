@@ -30,7 +30,7 @@
 	},
 	"scripts": {
 		"phpcs": [
-			"phpcs . --ignore=vendor,node_modules,assets --extensions=php -s -p"
+			"phpcs . --ignore=vendor,node_modules,assets --ignore-annotations --severity=1 --extensions=php -s -p"
 		],
 		"phpcbf": [
 			"phpcbf . --ignore=vendor,node_modules,assets --extensions=php -p"

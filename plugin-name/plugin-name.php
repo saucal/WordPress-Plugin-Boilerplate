@@ -51,9 +51,9 @@ const PLUGIN_FILE = __FILE__;
 function get_error() {
 	return array(
 		/* translators: 1: composer command. 2: plugin directory */
-		'message'   => esc_html__( 'Your installation of WordPress Plugin Boilerplate plugin is incomplete. Please run %1$s within the %2$s directory.', 'plugin-name' ),
+		'message'   => __( 'Your installation of WordPress Plugin Boilerplate plugin is incomplete. Please run %1$s within the %2$s directory.', 'plugin-name' ),
 		'command'   => 'composer install',
-		'directory' => esc_html( str_replace( ABSPATH, '', __DIR__ ) ),
+		'directory' => str_replace( ABSPATH, '', __DIR__ ),
 	);
 }
 
@@ -73,7 +73,7 @@ if ( ! is_readable( $autoloader ) ) {
 
 	if ( defined( 'WP_DEBUG' ) && WP_DEBUG ) {
 		$composer_error = get_error();
-		error_log( sprintf( $composer_error['message'], '`' . $composer_error['command'] . '`', '`' . $composer_error['directory'] . '`' ) ); // phpcs:ignore
+		error_log( sprintf( $composer_error['message'], '`' . $composer_error['command'] . '`', '`' . $composer_error['directory'] . '`' ) );
 	}
 
 	/**
@@ -86,7 +86,7 @@ if ( ! is_readable( $autoloader ) ) {
 			?>
 			<div class="notice notice-error">
 				<p>
-					<?php printf( $composer_error['message'], '<code>' . $composer_error['command'] . '</code>', '<code>' . $composer_error['directory'] . '</code>' ); // phpcs:ignore ?>
+					<?php printf( esc_html( $composer_error['message'] ), '<code>' . esc_html( $composer_error['command'] ) . '</code>', '<code>' . esc_html( $composer_error['directory'] ) . '</code>' ); ?>
 				</p>
 			</div>
 			<?php
