@@ -24,7 +24,7 @@
 		"lint:css": "cross-var wp-scripts lint-style $npm_package_config_webpack_css",
 		"fix:css": "cross-var wp-scripts lint-style $npm_package_config_webpack_css --fix",
 		"makepot": "wpi18n makepot --domain-path=\"i18n/languages\" --pot-file=\"plugin-name.pot\" --type=\"plugin\" --main-file=\"plugin-name.php\" --exclude=\"node_modules,tests,docs,docker,vendor\"",
-		"watch": "webpack --mode=none --watch",
+		"watch": "wp-scripts start",
 		"archive": "cross-var rm -rf $npm_package_config_wp_org_slug.zip vendor/ node_modules/ && composer install --no-dev --optimize-autoloader && npm install --only=prod --ignore-scripts && composer archive --file=$npm_package_config_wp_org_slug --dir=$npm_package_config_wp_org_slug --format=zip",
 		"postarchive": "rm -rf vendor/ node_modules/ && npm install",
 		"build:assets": "wp-scripts build",
