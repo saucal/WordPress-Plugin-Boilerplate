@@ -57,8 +57,13 @@ final class Assets {
 	 */
 	public static function add_scripts( $scripts ) {
 
+		$scripts_data = file_exists( Utils::plugin_path() . '/assets/js/admin/plugin-name.asset.php' ) ?
+		include Utils::plugin_path() . '/assets/js/admin/plugin-name.asset.php' :
+		array( 'dependencies' => array() );
+
 		$scripts['plugin-name-admin'] = array(
 			'src'  => AssetsMain::localize_asset( 'js/admin/plugin-name.js' ),
+			'deps' => array_merge( $scripts_data['dependencies'], array( 'jquery' ) ),
 			'data' => array(
 				'ajax_url' => Utils::ajax_url(),
 			),

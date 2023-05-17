@@ -91,7 +91,7 @@ final class Main {
 
 		Customizations\ACF::hooks();
 
-		// Set up localisation.
+		// Set up localization.
 		self::load_plugin_textdomain();
 
 		/**

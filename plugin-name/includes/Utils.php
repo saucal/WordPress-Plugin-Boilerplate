@@ -35,7 +35,6 @@ final class Utils {
 				return defined( 'DOING_CRON' ) && DOING_CRON;
 			case 'frontend':
 				return ( ! is_admin() || ( defined( 'DOING_AJAX' ) && DOING_AJAX ) ) && ( ! defined( 'DOING_CRON' ) || ! DOING_CRON ) && ! self::is_rest_api_request();
-				return ( ! is_admin() || ( defined( 'DOING_AJAX' ) && DOING_AJAX ) ) && ( ! defined( 'DOING_CRON' ) || ! DOING_CRON );
 		}
 	}
 
