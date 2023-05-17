@@ -33,3 +33,4 @@ wordpress_org_assets export-ignore
 src export-ignore
 .vscode export-ignore
 *.zip export-ignore
+.nvmrc export-ignore
