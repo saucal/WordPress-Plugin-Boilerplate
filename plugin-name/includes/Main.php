@@ -38,7 +38,11 @@ final class Main {
 
 		add_action( 'init', array( __CLASS__, 'init' ) );
 
-		// Perform other actions when plugin is loaded.
+		/**
+		 * Perform other actions when plugin is loaded.
+		 *
+		 * @since 1.0.0
+		 */
 		do_action( 'plugin_name_loaded' );
 	}
 
@@ -87,11 +91,15 @@ final class Main {
 
 		Customizations\ACF::hooks();
 
-		// Set up localisation.
+		// Set up localization.
 		self::load_plugin_textdomain();
 
-		// Init action.
-		do_action( 'plugin_name_loaded' );
+		/**
+		 * Init action.
+		 *
+		 * @since 1.0.0
+		 */
+		do_action( 'plugin_name_fully_loaded' );
 	}
 
 
@@ -102,12 +110,20 @@ final class Main {
 	 */
 	public static function init() {
 
-		// Before init action.
+		/**
+		 * Before init action.
+		 *
+		 * @since 1.0.0
+		 */
 		do_action( 'before_plugin_name_init' );
 
 		// Add needed hooks here.
 
-		// After init action.
+		/**
+		 * After init action.
+		 *
+		 * @since 1.0.0
+		 */
 		do_action( 'plugin_name_init' );
 	}
 
@@ -176,7 +192,11 @@ final class Main {
 	 */
 	private static function load_plugin_textdomain() {
 
-		// Add plugin's locale.
+		/**
+		 * Add plugin's locale.
+		 *
+		 * @since 1.0.0
+		 */
 		$locale = apply_filters( 'plugin_locale', get_locale(), 'plugin-name' );
 
 		load_textdomain( 'plugin-name', WP_LANG_DIR . '/plugin-name/plugin-name-' . $locale . '.mo' );

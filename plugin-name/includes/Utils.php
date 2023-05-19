@@ -34,7 +34,7 @@ final class Utils {
 			case 'cron':
 				return defined( 'DOING_CRON' ) && DOING_CRON;
 			case 'frontend':
-				return ( ! is_admin() || ( defined( 'DOING_AJAX' ) && DOING_AJAX ) ) && ( ! defined( 'DOING_CRON' ) || ! DOING_CRON );
+				return ( ! is_admin() || ( defined( 'DOING_AJAX' ) && DOING_AJAX ) ) && ( ! defined( 'DOING_CRON' ) || ! DOING_CRON ) && ! self::is_rest_api_request();
 		}
 	}
 
@@ -65,7 +65,11 @@ final class Utils {
 	 * @return string
 	 */
 	public static function template_path() {
-		// Allow 3rd party plugin filter template path from their plugin.
+		/**
+		 * Allow 3rd party plugin filter template path from their plugin.
+		 *
+		 * @since 1.0.0
+		 */
 		return apply_filters( 'plugin_name_template_path', 'plugin-name/' );
 	}
 
@@ -77,5 +81,30 @@ final class Utils {
 	 */
 	public static function ajax_url() {
 		return admin_url( 'admin-ajax.php', 'relative' );
+	}
+
+	/**
+	 * Determines if incoming request is towards the REST API.
+	 *
+	 * @return boolean
+	 */
+	protected static function is_rest_api_request() {
+		if ( function_exists( 'WC' ) && method_exists( WC(), 'is_rest_api_request' ) ) {
+			return WC()->is_rest_api_request();
+		}
+
+		if ( empty( $_SERVER['REQUEST_URI'] ) ) {
+			return false;
+		}
+
+		$rest_prefix         = trailingslashit( rest_get_url_prefix() );
+		$is_rest_api_request = ( false !== strpos( $_SERVER['REQUEST_URI'], $rest_prefix ) ); // phpcs:disable WordPress.Security.ValidatedSanitizedInput.MissingUnslash, WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
+
+		/**
+		 * Whether this is a REST API request.
+		 *
+		 * @since 3.6.0
+		 */
+		return apply_filters( 'woocommerce_is_rest_api_request', $is_rest_api_request );
 	}
 }

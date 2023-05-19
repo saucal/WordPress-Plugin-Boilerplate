@@ -42,7 +42,7 @@ final class Assets {
 	public static function add_styles( $styles ) {
 
 		$styles['plugin-name-general'] = array(
-			'src' => AssetsMain::localize_asset( 'css/front/plugin-name.css' ),
+			'src' => AssetsMain::localize_asset( 'css/frontend/plugin-name.css' ),
 		);
 
 		return $styles;
@@ -57,8 +57,13 @@ final class Assets {
 	 */
 	public static function add_scripts( $scripts ) {
 
+		$scripts_data = file_exists( Utils::plugin_path() . '/assets/js/frontend/plugin-name.asset.php' ) ?
+		include Utils::plugin_path() . '/assets/js/frontend/plugin-name.asset.php' :
+		array( 'dependencies' => array() );
+
 		$scripts['plugin-name-general'] = array(
-			'src'  => AssetsMain::localize_asset( 'js/front/plugin-name.js' ),
+			'src'  => AssetsMain::localize_asset( 'js/frontend/plugin-name.js' ),
+			'deps' => array_merge( $scripts_data['dependencies'], array( 'jquery' ) ),
 			'data' => array(
 				'ajax_url' => Utils::ajax_url(),
 			),

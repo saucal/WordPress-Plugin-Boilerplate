@@ -35,7 +35,11 @@ final class Block {
 	 */
 	public static function register_blocks() {
 
-		// A register block for each existing block.
+		/**
+		 * A register block for each existing block.
+		 *
+		 * @since 1.0.0
+		 */
 		$blocks = apply_filters( 'plugin_name_gutenberg_blocks', array() );
 
 		foreach ( $blocks as $key => $block ) {

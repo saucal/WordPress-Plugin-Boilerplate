@@ -23,7 +23,9 @@ class ACF {
 	 * @return void
 	 */
 	public static function hooks() {
+		// phpcs:ignore Squiz.PHP.CommentedOutCode.Found, Squiz.Commenting.InlineComment.InvalidEndChar
 		// add_filter( 'acf/settings/load_json', array( __CLASS__, 'acf_json_load_point' ) );
+		// phpcs:ignore Squiz.PHP.CommentedOutCode.Found, Squiz.Commenting.InlineComment.InvalidEndChar
 		// add_filter( 'acf/settings/save_json', array( __CLASS__, 'acf_json_save_point' ) );
 	}
 

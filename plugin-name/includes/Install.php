@@ -25,7 +25,11 @@ final class Install {
 
 		// Perform install actions here.
 
-		// Trigger action.
+		/**
+		 * Trigger action install
+		 *
+		 * @since 1.0.0
+		 */
 		do_action( 'plugin_name_installed' );
 	}
 }

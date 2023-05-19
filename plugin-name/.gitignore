@@ -1,5 +1,6 @@
 *.log
 .htaccess
+*.zip
 
 # Ignore compiled assets
 assets/css*
@@ -10,6 +11,12 @@ node_modules
 
 # Ignore composer everywhere
 vendor
+
+# Ignore generated assets
+assets
+
+# Ignore generated pot file
+i18n/languages/*.pot
 
 # Editors
 *.esproj

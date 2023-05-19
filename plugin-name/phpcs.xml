@@ -17,8 +17,13 @@
 	<config name="testVersion" value="7.3-" />
 
 	<!-- Rules -->
-	<rule ref="WooCommerce-Core">
+	<rule ref="WordPress-Extra">
 		<exclude name="Generic.Files.LineEndings.InvalidEOLChar"/>
+	</rule>
+
+	<rule ref="WooCommerce-Core">
+		<exclude name="Core.Commenting.CommentTags.AuthorTag"/>
+		<exclude name="WordPress.PHP.DontExtract" />
 	</rule>
 
 	<!-- Specific excludes -->
@@ -36,9 +41,11 @@
 		</properties>
 	</rule>
 
-	<rule ref="PHPCompatibility" />
+	<rule ref="PHPCompatibility">
+		<exclude-pattern>./tests/*</exclude-pattern>
+	</rule>
 
-	<rule ref="Squiz.Commenting.FileComment.Missing">
-		<exclude-pattern>index.asset.php</exclude-pattern>
+	<rule ref="WordPress.PHP.DevelopmentFunctions.error_log_error_log">
+		<exclude-pattern>./plugin-name.php</exclude-pattern>
 	</rule>
 </ruleset>

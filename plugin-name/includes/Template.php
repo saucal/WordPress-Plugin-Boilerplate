@@ -45,7 +45,11 @@ final class Template {
 			$template = locate_template( array( "{$slug}.php", Utils::template_path() . "{$slug}.php" ) );
 		}
 
-		// Allow 3rd party plugins to filter template file from their plugin.
+		/**
+		 * Allow 3rd party plugins to filter template file from their plugin.
+		 *
+		 * @since 1.0.0
+		 */
 		$template = apply_filters( 'plugin_name_get_template_part', $template, $slug, $name );
 
 		if ( $template ) {
@@ -74,19 +78,31 @@ final class Template {
 		$located = self::locate( $template_name, $template_path, $default_path );
 
 		if ( ! file_exists( $located ) ) {
-			_doing_it_wrong( __FUNCTION__, sprintf( '<code>%s</code> does not exist.', $located ), '1.0.0' ); //phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+			_doing_it_wrong( __FUNCTION__, sprintf( '<code>%s</code> does not exist.', esc_html( $located ) ), '1.0.0' );
 			return;
 		}
 
-		// Allow 3rd party plugin filter template file from their plugin.
+		/**
+		 * Allow 3rd party plugin filter template file from their plugin.
+		 *
+		 * @since 1.0.0
+		 */
 		$located = apply_filters( 'plugin_name_get_template', $located, $template_name, $args, $template_path, $default_path );
 
-		// Perform other actions before template part is included.
+		/**
+		 * Perform other actions before template part is included.
+		 *
+		 * @since 1.0.0
+		 */
 		do_action( 'plugin_name_before_template_part', $template_name, $template_path, $located, $args );
 
 		include $located;
 
-		// Perform other actions after template part is included.
+		/**
+		 * Perform other actions after template part is included.
+		 *
+		 * @since 1.0.0
+		 */
 		do_action( 'plugin_name_after_template_part', $template_name, $template_path, $located, $args );
 	}
 
@@ -150,7 +166,11 @@ final class Template {
 			$template = $default_path . $template_name;
 		}
 
-		// Return what we found.
+		/**
+		 * Return what we found.
+		 *
+		 * @since 1.0.0
+		 */
 		return apply_filters( 'plugin_name_locate_template', $template, $template_name, $template_path );
 	}
 }
