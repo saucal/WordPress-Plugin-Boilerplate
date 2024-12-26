@@ -21,11 +21,11 @@ final class Install {
 	/**
 	 * Install action.
 	 */
-	public static function install() {
+	public static function install( $sitewide = false ) {
 
 		// Perform install actions here.
 
 		// Trigger action.
-		do_action( 'plugin_name_installed' );
+		do_action( 'plugin_name_installed', $sitewide );
 	}
 }
