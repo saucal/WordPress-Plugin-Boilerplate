@@ -21,7 +21,7 @@ final class Install {
 	/**
 	 * Install action.
 	 */
-	public static function install() {
+	public static function install( $sitewide = false ) {
 
 		// Perform install actions here.
 
@@ -30,6 +30,6 @@ final class Install {
 		 *
 		 * @since 1.0.0
 		 */
-		do_action( 'plugin_name_installed' );
+		do_action( 'plugin_name_installed', $sitewide );
 	}
 }
