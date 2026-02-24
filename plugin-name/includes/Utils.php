@@ -1,10 +1,6 @@
 <?php
 /**
- * Utility methods
- *
- * @class       Utils
- * @version     1.0.0
- * @package     Plugin_Name/Classes/
+ * Utility methods.
  */
 
 namespace Plugin_Name;

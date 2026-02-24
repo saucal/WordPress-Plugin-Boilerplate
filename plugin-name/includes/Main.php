@@ -1,9 +1,6 @@
 <?php
 /**
  * Main class.
- *
- * @package  Plugin_Name
- * @version  1.0.0
  */
 
 namespace Plugin_Name;
@@ -48,8 +45,6 @@ final class Main {
 
 	/**
 	 * Cloning is forbidden.
-	 *
-	 * @since 1.0.0
 	 */
 	public function __clone() {
 		_doing_it_wrong( __FUNCTION__, esc_html__( 'Cheatin&#8217; huh?', 'plugin-name' ), '1.0.0' );
@@ -58,8 +53,6 @@ final class Main {
 
 	/**
 	 * Unserializing instances of this class is forbidden.
-	 *
-	 * @since 1.0.0
 	 */
 	public function __wakeup() {
 		_doing_it_wrong( __FUNCTION__, esc_html__( 'Cheatin&#8217; huh?', 'plugin-name' ), '1.0.0' );
@@ -68,8 +61,6 @@ final class Main {
 
 	/**
 	 * Include plugins files and hook into actions and filters.
-	 *
-	 * @since  1.0.0
 	 */
 	public static function load() {
 

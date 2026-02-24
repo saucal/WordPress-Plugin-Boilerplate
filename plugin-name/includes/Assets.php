@@ -1,10 +1,6 @@
 <?php
 /**
  * Handle scripts register and enqueue.
- *
- * @class       Assets
- * @version     1.0.0
- * @package     Plugin_Name/Classes/
  */
 
 namespace Plugin_Name;
@@ -259,8 +255,7 @@ abstract class Assets {
 	/**
 	 * Localize a WC script once.
 	 *
-	 * @since  1.0.0 this needs less wp_script_is() calls due to https://core.trac.wordpress.org/ticket/28404 being added in WP 4.0.
-	 * @param  string $handle Handle of the script to localize.
+	 * @param string $handle Handle of the script to localize.
 	 *
 	 * @return void
 	 */

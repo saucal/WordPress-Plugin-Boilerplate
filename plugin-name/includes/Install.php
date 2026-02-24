@@ -1,10 +1,6 @@
 <?php
 /**
  * Handle plugin's install actions.
- *
- * @class       Install
- * @version     1.0.0
- * @package     Plugin_Name/Classes/
  */
 
 namespace Plugin_Name;

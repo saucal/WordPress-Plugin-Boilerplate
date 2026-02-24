@@ -7,10 +7,6 @@
  * registers the activation and deactivation functions, and defines a function
  * that starts the plugin.
  *
- * @link              http://example.com
- * @since             1.0.0
- * @package           Plugin_Name
- *
  * @wordpress-plugin
  * Plugin Name: WordPress Plugin Boilerplate
  * Plugin URI:  http://example.com/plugin-name-uri/
@@ -81,7 +77,7 @@ if ( ! is_readable( $autoloader ) ) {
 	 */
 	add_action(
 		'admin_notices',
-		function() {
+		function () {
 			$composer_error = get_error();
 			?>
 			<div class="notice notice-error">

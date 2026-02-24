@@ -1,10 +1,6 @@
 <?php
 /**
  * Register frontend assets.
- *
- * @class       FrontAssets
- * @version     1.0.0
- * @package     Plugin_Name/Classes/
  */
 
 namespace Plugin_Name\Front;

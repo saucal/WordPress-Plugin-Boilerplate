@@ -1,9 +1,6 @@
 <?php
 /**
- * ACF Hooks
- *
- * @package     Plugin_Name/Customizations
- * @version     1.0.0
+ * ACF Hooks.
  */
 
 namespace Plugin_Name\Customizations;

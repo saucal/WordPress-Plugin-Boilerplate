@@ -1,10 +1,6 @@
 <?php
 /**
  * Handle admin hooks.
- *
- * @class       Admin
- * @version     1.0.0
- * @package     Plugin_Name/Classes/
  */
 
 namespace Plugin_Name\Admin;

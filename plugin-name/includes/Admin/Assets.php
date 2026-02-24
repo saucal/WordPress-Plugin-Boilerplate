@@ -1,10 +1,6 @@
 <?php
 /**
  * Register admin assets.
- *
- * @class       AdminAssets
- * @version     1.0.0
- * @package     Plugin_Name/Classes/
  */
 
 namespace Plugin_Name\Admin;
