@@ -25,8 +25,8 @@ final class Assets {
 	 * Hook in methods.
 	 */
 	public static function hooks() {
-		add_filter( 'plugin_name_enqueue_styles', array( __CLASS__, 'add_styles' ), 9 );
-		add_filter( 'plugin_name_enqueue_scripts', array( __CLASS__, 'add_scripts' ), 9 );
+		add_filter( 'plugin_name_enqueue_styles', array( self::class, 'add_styles' ), 9 );
+		add_filter( 'plugin_name_enqueue_scripts', array( self::class, 'add_scripts' ), 9 );
 		add_action( 'admin_enqueue_scripts', array( AssetsMain::class, 'load_scripts' ) );
 		add_action( 'admin_print_scripts', array( AssetsMain::class, 'localize_printed_scripts' ), 5 );
 		add_action( 'admin_print_footer_scripts', array( AssetsMain::class, 'localize_printed_scripts' ), 5 );

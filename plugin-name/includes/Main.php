@@ -37,9 +37,9 @@ final class Main {
 
 		Rewrites::bootstrap_hooks();
 
-		add_action( 'plugins_loaded', array( __CLASS__, 'load' ) );
+		add_action( 'plugins_loaded', array( self::class, 'load' ) );
 
-		add_action( 'init', array( __CLASS__, 'init' ) );
+		add_action( 'init', array( self::class, 'init' ) );
 
 		// Perform other actions when plugin file is parsed.
 		do_action( 'plugin_name_bootstrap' );

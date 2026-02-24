@@ -24,7 +24,7 @@ final class Block {
 	 * @return void
 	 */
 	public static function hooks() {
-		add_action( 'init', array( __CLASS__, 'register_blocks' ) );
+		add_action( 'init', array( self::class, 'register_blocks' ) );
 	}
 
 
