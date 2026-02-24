@@ -33,6 +33,7 @@ final class Main {
 	public static function bootstrap() {
 
 		register_activation_hook( PLUGIN_FILE, array( Install::class, 'install' ) );
+		register_deactivation_hook( PLUGIN_FILE, array( Install::class, 'uninstall' ) );
 
 		add_action( 'plugins_loaded', array( __CLASS__, 'load' ) );
 
