@@ -185,6 +185,6 @@ final class Main {
 
 		load_textdomain( 'plugin-name', WP_LANG_DIR . '/plugin-name/plugin-name-' . $locale . '.mo' );
 
-		load_plugin_textdomain( 'plugin-name', false, plugin_basename( dirname( __FILE__ ) ) . '/i18n/languages' );
+		load_plugin_textdomain( 'plugin-name', false, plugin_basename( __DIR__ ) . '/i18n/languages' );
 	}
 }
