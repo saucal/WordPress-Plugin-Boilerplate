@@ -38,8 +38,8 @@ final class Main {
 
 		add_action( 'init', array( __CLASS__, 'init' ) );
 
-		// Perform other actions when plugin is loaded.
-		do_action( 'plugin_name_loaded' );
+		// Perform other actions when plugin file is parsed.
+		do_action( 'plugin_name_bootstrap' );
 	}
 
 
@@ -90,7 +90,7 @@ final class Main {
 		// Set up localisation.
 		self::load_plugin_textdomain();
 
-		// Init action.
+		// Loaded action.
 		do_action( 'plugin_name_loaded' );
 	}
 
