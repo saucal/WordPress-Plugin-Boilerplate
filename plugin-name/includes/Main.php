@@ -35,6 +35,8 @@ final class Main {
 		register_activation_hook( PLUGIN_FILE, array( Install::class, 'install' ) );
 		register_deactivation_hook( PLUGIN_FILE, array( Install::class, 'uninstall' ) );
 
+		Rewrites::bootstrap_hooks();
+
 		add_action( 'plugins_loaded', array( __CLASS__, 'load' ) );
 
 		add_action( 'init', array( __CLASS__, 'init' ) );
@@ -85,6 +87,7 @@ final class Main {
 
 		// Common includes.
 		Block::hooks();
+		Rewrites::hooks();
 
 		Customizations\ACF::hooks();
 
