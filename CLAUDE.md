@@ -6,6 +6,27 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 WordPress Plugin Boilerplate by Saucal. A modern, PSR-4 based WordPress plugin scaffold with strict code quality tooling. The actual plugin code lives inside the `plugin-name/` subdirectory.
 
+This repository is a **template**, not a standalone plugin. The [saucal/scaffold](https://github.com/saucal/scaffold) tool (`sc-scaffold`) generates a real plugin from this boilerplate by replacing placeholders throughout the codebase.
+
+## Scaffold Placeholders
+
+When editing this boilerplate, use the following placeholders consistently — they are replaced by `sc-scaffold plugin --name="My Plugin"`:
+
+| Placeholder | Becomes (example for "My Awesome Plugin") |
+|---|---|
+| `plugin-name` | `my-awesome-plugin` (slug, used in directory/file names) |
+| `plugin_name` | `my_awesome_plugin` (instance/function prefix) |
+| `Plugin_Name` | `MyAwesomePlugin` (PHP namespace) |
+| `PNAME` | `MAP` (uppercase acronym, for constants) |
+| `pname` | `map` (lowercase acronym) |
+| `PName` / `PNameSingleton` | `MAP` (short class name) |
+| `WordPress Plugin Boilerplate` | `My Awesome Plugin` (human-readable name) |
+| `http://example.com/plugin-name-uri/` | Plugin URI |
+| `author-slug` | `saucal` |
+| `Your Name or Your Company` | `SAU/CAL` |
+
+File and directory names containing `plugin-name` or `pname` are also renamed to the slug/short name.
+
 ## Build Commands
 
 All npm commands run from `plugin-name/`:
