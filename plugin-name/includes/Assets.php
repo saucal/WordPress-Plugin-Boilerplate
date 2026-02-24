@@ -40,6 +40,7 @@ abstract class Assets {
 	 * Tryies to localize the minified version if required and exists, otherwise load the unminified version
 	 *
 	 * @param  string $path Path of the asset to locate.
+	 *
 	 * @return string
 	 */
 	public static function localize_asset( $path ) {
@@ -93,6 +94,7 @@ abstract class Assets {
 	 * Register a script for use.
 	 *
 	 * @uses   wp_register_script()
+	 *
 	 * @param string           $handle    Name of the script. Should be unique.
 	 * @param string|bool      $path      Full URL of the script, or path of the script relative to the WordPress root directory.
 	 *                                    If source is set to false, script is an alias of other scripts it depends on.
@@ -116,6 +118,7 @@ abstract class Assets {
 	 * Register and enqueue a script for use.
 	 *
 	 * @uses   wp_enqueue_script()
+	 *
 	 * @param string           $handle    Name of the script. Should be unique.
 	 * @param string|bool      $path      Full URL of the script, or path of the script relative to the WordPress root directory.
 	 *                                    If source is set to false, script is an alias of other scripts it depends on.
@@ -143,6 +146,7 @@ abstract class Assets {
 	 * Register a style for use.
 	 *
 	 * @uses   wp_register_style()
+	 *
 	 * @param string           $handle  Name of the stylesheet. Should be unique.
 	 * @param string|bool      $path    Full URL of the stylesheet, or path of the stylesheet relative to the WordPress root directory.
 	 *                                  If source is set to false, stylesheet is an alias of other stylesheets it depends on.
@@ -167,6 +171,7 @@ abstract class Assets {
 	 * Register and enqueue a styles for use.
 	 *
 	 * @uses   wp_enqueue_style()
+	 *
 	 * @param string           $handle  Name of the stylesheet. Should be unique.
 	 * @param string|bool      $path    Full URL of the stylesheet, or path of the stylesheet relative to the WordPress root directory.
 	 *                                  If source is set to false, stylesheet is an alias of other stylesheets it depends on.
@@ -278,6 +283,7 @@ abstract class Assets {
 	 * Return data for script handles.
 	 *
 	 * @param  string $handle Handle of the script to add data for.
+	 *
 	 * @return array<string,mixed>|bool
 	 */
 	private static function get_script_data( $handle ) {

@@ -94,6 +94,7 @@ final class Template {
 	 * @param array<string,mixed> $args (default: array()) Args to send to template.
 	 * @param string              $template_path (default: '') Path to look the template into.
 	 * @param string              $default_path (default: '') Default path to fallback to.
+	 *
 	 * @return string
 	 */
 	public static function get_html( $template_name, $args = array(), $template_path = '', $default_path = '' ) {
@@ -120,6 +121,7 @@ final class Template {
 	 * @param string $template_name Filename to locate.
 	 * @param string $template_path (default: '') Path to look the template into.
 	 * @param string $default_path (default: '') Default path to fallback to.
+	 *
 	 * @return string
 	 */
 	public static function locate( $template_name, $template_path = '', $default_path = '' ) {

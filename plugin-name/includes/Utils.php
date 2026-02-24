@@ -18,6 +18,7 @@ final class Utils {
 	 * What type of request is this?
 	 *
 	 * @param  string $type admin, ajax, cron or frontend.
+	 *
 	 * @return bool
 	 */
 	public static function is_request( $type ) {

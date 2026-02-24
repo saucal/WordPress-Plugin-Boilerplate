@@ -53,6 +53,7 @@ final class Block {
 	 *
 	 * @param string $block Block name.
 	 * @param array  $args  Block arguments.
+	 *
 	 * @return void
 	 */
 	public static function register_admin( $block = '', $args = array() ) {
@@ -81,6 +82,7 @@ final class Block {
 	 *
 	 * @param string $block Block name.
 	 * @param array  $args  Block arguments.
+	 *
 	 * @return void
 	 */
 	public static function register( $block = '', $args = array() ) {

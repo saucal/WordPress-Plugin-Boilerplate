@@ -28,12 +28,13 @@ class ACF {
 	 * Set from where ACF must load JSON files
 	 *
 	 * @param  array<string> $paths Paths that ACF will read JSON from.
+	 *
 	 * @return array<string>
 	 */
 	public static function acf_json_load_point( $paths ) {
 		unset( $paths[0] );
 
-		$paths[] = dirname( __FILE__ ) . '/acf-json';
+		$paths[] = __DIR__ . '/acf-json';
 
 		return $paths;
 	}
@@ -42,10 +43,11 @@ class ACF {
 	 * Set to where ACF must save JSON files
 	 *
 	 * @param  string $path Path that ACF will save JSON to.
+	 *
 	 * @return string
 	 */
 	public static function acf_json_save_point( $path ) {
-		$path = dirname( __FILE__ ) . '/acf-json';
+		$path = __DIR__ . '/acf-json';
 
 		return $path;
 	}

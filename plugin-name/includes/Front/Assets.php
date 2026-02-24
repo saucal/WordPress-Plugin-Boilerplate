@@ -33,6 +33,7 @@ final class Assets {
 	 * Add styles for the admin.
 	 *
 	 * @param array $styles Admin styles.
+	 *
 	 * @return array<string,array>
 	 */
 	public static function add_styles( $styles ) {
@@ -49,6 +50,7 @@ final class Assets {
 	 * Add scripts for the admin.
 	 *
 	 * @param  array $scripts Admin scripts.
+	 *
 	 * @return array<string,array>
 	 */
 	public static function add_scripts( $scripts ) {

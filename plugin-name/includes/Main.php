@@ -8,7 +8,6 @@ namespace Plugin_Name;
 use Plugin_Name\Admin\Main as Admin;
 use Plugin_Name\Front\Main as Front;
 
-
 /**
  * Base Plugin class holding generic functionality
  */
@@ -140,7 +139,7 @@ final class Main {
 
 			add_action(
 				'admin_notices',
-				function() use ( $errors ) {
+				function () use ( $errors ) {
 					?>
 					<div class="notice notice-error">
 						<?php
