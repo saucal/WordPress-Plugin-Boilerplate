@@ -14,11 +14,13 @@
 
 	<!-- Configs -->
 	<config name="minimum_supported_wp_version" value="5.6" />
-	<config name="testVersion" value="7.3-" />
+	<config name="testVersion" value="8.1-" />
 
 	<!-- Rules -->
-	<rule ref="WooCommerce-Core">
+	<rule ref="WordPress-Extra">
 		<exclude name="Generic.Files.LineEndings.InvalidEOLChar"/>
+		<exclude name="WordPress.PHP.YodaConditions"/>
+		<exclude name="Universal.ControlStructures.DisallowLonelyIf" />
 	</rule>
 
 	<!-- Specific excludes -->
@@ -32,13 +34,89 @@
 
 	<rule ref="WordPress.WP.I18n">
 		<properties>
-			<property name="text_domain" type="array" value="plugin-name" />
+			<property name="text_domain" type="array">
+				<element value="plugin-name" />
+			</property>
 		</properties>
 	</rule>
 
 	<rule ref="PHPCompatibility" />
 
+	<rule ref="Generic.CodeAnalysis">
+		<exclude name="Generic.CodeAnalysis.AssignmentInCondition.FoundInWhileCondition"/>
+		<exclude name="Generic.CodeAnalysis.UnusedFunctionParameter"/>
+	</rule>
+
 	<rule ref="Squiz.Commenting.FileComment.Missing">
 		<exclude-pattern>index.asset.php</exclude-pattern>
 	</rule>
+
+	<rule ref="Squiz.Classes.ClassFileName"></rule>
+
+	<rule ref="SlevomatCodingStandard.Files.TypeNameMatchesFileName">
+		<properties>
+			<property name="rootNamespaces" type="array">
+				<element key="includes" value="Plugin_Name"/>
+			</property>
+		</properties>
+	</rule>
+
+	<rule ref="SlevomatCodingStandard.Commenting.ForbiddenAnnotations">
+		<properties>
+			<property name="forbiddenAnnotations" type="array">
+				<element value="@author"/>
+				<element value="@link"/>
+
+				<element value="@copyright"/>
+				<element value="@license"/>
+
+				<element value="@package"/>
+				<element value="@subpackage"/>
+
+				<element value="@class"/>
+
+				<element value="@version"/>
+				<element value="@since"/>
+				<element value="@created"/>
+			</property>
+		</properties>
+	</rule>
+
+	<rule ref="SlevomatCodingStandard.Commenting.DocCommentSpacing">
+		<properties>
+			<property name="linesCountAfterLastContent" value="0" />
+			<property name="linesCountBetweenAnnotationsGroups" value="1" />
+			<property name="linesCountBetweenDescriptionAndAnnotations" value="1" />
+			<property name="annotationsGroups" type="array">
+				<element value="
+					@uses,
+				"/>
+				<element value="
+					@var,
+					@param,
+				"/>
+				<element value="
+					@return,
+				"/>
+			</property>
+		</properties>
+	</rule>
+
+	<rule ref="SlevomatCodingStandard.Commenting.RequireOneLinePropertyDocComment" />
+
+	<rule ref="SlevomatCodingStandard.Namespaces.UselessAlias" />
+	<rule ref="SlevomatCodingStandard.Namespaces.UnusedUses" />
+	<rule ref="SlevomatCodingStandard.Variables.UselessVariable" />
+	<rule ref="SlevomatCodingStandard.PHP.UselessSemicolon" />
+	<rule ref="SlevomatCodingStandard.Namespaces.UseDoesNotStartWithBackslash" />
+	<rule ref="SlevomatCodingStandard.Namespaces.UseSpacing">
+		<properties>
+			<property name="linesCountBeforeFirstUse" value="1" />
+			<property name="linesCountBetweenUseTypes" value="0" />
+			<property name="linesCountAfterLastUse" value="1" />
+		</properties>
+	</rule>
+	<rule ref="SlevomatCodingStandard.Namespaces.AlphabeticallySortedUses" />
+	<rule ref="SlevomatCodingStandard.Namespaces.DisallowGroupUse" />
+
 </ruleset>

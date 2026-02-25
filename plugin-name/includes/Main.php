@@ -1,16 +1,12 @@
 <?php
 /**
  * Main class.
- *
- * @package  Plugin_Name
- * @version  1.0.0
  */
 
 namespace Plugin_Name;
 
 use Plugin_Name\Admin\Main as Admin;
 use Plugin_Name\Front\Main as Front;
-
 
 /**
  * Base Plugin class holding generic functionality
@@ -21,7 +17,7 @@ final class Main {
 	 * Set the minimum required versions for the plugin.
 	 */
 	const PLUGIN_REQUIREMENTS = array(
-		'php_version' => '7.3',
+		'php_version' => '8.1',
 		'wp_version'  => '5.6',
 		'wc_version'  => '5.3',
 	);
@@ -33,20 +29,21 @@ final class Main {
 	public static function bootstrap() {
 
 		register_activation_hook( PLUGIN_FILE, array( Install::class, 'install' ) );
+		register_deactivation_hook( PLUGIN_FILE, array( Install::class, 'uninstall' ) );
 
-		add_action( 'plugins_loaded', array( __CLASS__, 'load' ) );
+		Rewrites::bootstrap_hooks();
 
-		add_action( 'init', array( __CLASS__, 'init' ) );
+		add_action( 'plugins_loaded', array( self::class, 'load' ) );
 
-		// Perform other actions when plugin is loaded.
-		do_action( 'plugin_name_loaded' );
+		add_action( 'init', array( self::class, 'init' ) );
+
+		// Perform other actions when plugin file is parsed.
+		do_action( 'plugin_name_bootstrap' );
 	}
 
 
 	/**
 	 * Cloning is forbidden.
-	 *
-	 * @since 1.0.0
 	 */
 	public function __clone() {
 		_doing_it_wrong( __FUNCTION__, esc_html__( 'Cheatin&#8217; huh?', 'plugin-name' ), '1.0.0' );
@@ -55,8 +52,6 @@ final class Main {
 
 	/**
 	 * Unserializing instances of this class is forbidden.
-	 *
-	 * @since 1.0.0
 	 */
 	public function __wakeup() {
 		_doing_it_wrong( __FUNCTION__, esc_html__( 'Cheatin&#8217; huh?', 'plugin-name' ), '1.0.0' );
@@ -65,8 +60,6 @@ final class Main {
 
 	/**
 	 * Include plugins files and hook into actions and filters.
-	 *
-	 * @since  1.0.0
 	 */
 	public static function load() {
 
@@ -84,13 +77,14 @@ final class Main {
 
 		// Common includes.
 		Block::hooks();
+		Rewrites::hooks();
 
 		Customizations\ACF::hooks();
 
 		// Set up localisation.
 		self::load_plugin_textdomain();
 
-		// Init action.
+		// Loaded action.
 		do_action( 'plugin_name_loaded' );
 	}
 
@@ -145,7 +139,7 @@ final class Main {
 
 			add_action(
 				'admin_notices',
-				function() use ( $errors ) {
+				function () use ( $errors ) {
 					?>
 					<div class="notice notice-error">
 						<?php
@@ -181,6 +175,6 @@ final class Main {
 
 		load_textdomain( 'plugin-name', WP_LANG_DIR . '/plugin-name/plugin-name-' . $locale . '.mo' );
 
-		load_plugin_textdomain( 'plugin-name', false, plugin_basename( dirname( __FILE__ ) ) . '/i18n/languages' );
+		load_plugin_textdomain( 'plugin-name', false, plugin_basename( __DIR__ ) . '/i18n/languages' );
 	}
 }

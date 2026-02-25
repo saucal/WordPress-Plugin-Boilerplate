@@ -1,10 +1,6 @@
 <?php
 /**
- * Utility methods
- *
- * @class       Utils
- * @version     1.0.0
- * @package     Plugin_Name/Classes/
+ * Utility methods.
  */
 
 namespace Plugin_Name;
@@ -22,6 +18,7 @@ final class Utils {
 	 * What type of request is this?
 	 *
 	 * @param  string $type admin, ajax, cron or frontend.
+	 *
 	 * @return bool
 	 */
 	public static function is_request( $type ) {

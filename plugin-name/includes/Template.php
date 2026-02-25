@@ -1,10 +1,6 @@
 <?php
 /**
  * Contains template related methods.
- *
- * @class       Template
- * @version     1.0.0
- * @package     Plugin_Name/Classes/
  */
 
 namespace Plugin_Name;
@@ -94,11 +90,11 @@ final class Template {
 	/**
 	 * Like get, but returns the HTML instead of outputting.
 	 *
-	 * @since 2.5.0
 	 * @param string              $template_name Filename to locate.
 	 * @param array<string,mixed> $args (default: array()) Args to send to template.
 	 * @param string              $template_path (default: '') Path to look the template into.
 	 * @param string              $default_path (default: '') Default path to fallback to.
+	 *
 	 * @return string
 	 */
 	public static function get_html( $template_name, $args = array(), $template_path = '', $default_path = '' ) {
@@ -125,6 +121,7 @@ final class Template {
 	 * @param string $template_name Filename to locate.
 	 * @param string $template_path (default: '') Path to look the template into.
 	 * @param string $default_path (default: '') Default path to fallback to.
+	 *
 	 * @return string
 	 */
 	public static function locate( $template_name, $template_path = '', $default_path = '' ) {
