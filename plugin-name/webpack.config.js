@@ -260,5 +260,11 @@ module.exports = {
 			},
 		],
 	},
-	plugins: [ new RemoveEmptyScriptsPlugin(), ...defaultConfig.plugins ],
+	plugins: [
+		new RemoveEmptyScriptsPlugin(),
+		// Filter out RtlCssPlugin — uncomment the line below to enable RTL stylesheet generation.
+		...defaultConfig.plugins.filter(
+			( plugin ) => plugin.constructor.name !== 'RtlCssPlugin'
+		),
+	],
 };
