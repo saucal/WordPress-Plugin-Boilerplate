@@ -6,7 +6,6 @@ const path = require( 'path' );
 const { fromProjectRoot } = require( '@wordpress/scripts/utils/file' );
 const glob = require( 'glob' );
 const RemoveEmptyScriptsPlugin = require( 'webpack-remove-empty-scripts' );
-const { CleanWebpackPlugin } = require( 'clean-webpack-plugin' );
 
 const {
 	hasCssnanoConfig,
@@ -115,6 +114,9 @@ module.exports = {
 	output: {
 		path: fromProjectRoot( 'assets' + path.sep ),
 		filename: '[name].js',
+		clean: {
+			keep: /^index\.php$/,
+		},
 	},
 	optimization: {
 		...defaultConfig.optimization,
@@ -258,11 +260,5 @@ module.exports = {
 			},
 		],
 	},
-	plugins: [
-		new RemoveEmptyScriptsPlugin(),
-		// Replace the default CleanWebpackPlugin to preserve index.php.
-		...defaultConfig.plugins.filter(
-			( plugin ) => ! ( plugin instanceof CleanWebpackPlugin )
-		),
-	],
+	plugins: [ new RemoveEmptyScriptsPlugin(), ...defaultConfig.plugins ],
 };

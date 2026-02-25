@@ -33,7 +33,7 @@
 		"lint:php": "composer run-script phpcs ./"
 	},
 	"devDependencies": {
-		"@wordpress/scripts": "^26.19.0",
+		"@wordpress/scripts": "^30.27.0",
 		"glob": "^10.3.0",
 		"webpack-remove-empty-scripts": "^1.0.0"
 	},
