@@ -26,8 +26,8 @@
 		"build:makepot": "composer install && composer run makepot",
 		"build": "npm run build:assets && npm run build:makepot && npm run build:deps",
 		"format:js": "wp-scripts format ./src",
-		"lint:css": "wp-scripts lint-style ./src",
-		"lint:css:fix": "wp-scripts lint-style ./src --fix",
+		"lint:css": "wp-scripts lint-style \"./src/**/*.scss\"",
+		"lint:css:fix": "wp-scripts lint-style \"./src/**/*.scss\" --fix",
 		"lint:js": "wp-scripts lint-js ./src",
 		"lint:js:fix": "wp-scripts lint-js ./src --fix",
 		"lint:php": "composer run-script phpcs ./"
