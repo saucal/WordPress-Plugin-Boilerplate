@@ -5,6 +5,10 @@
 
 namespace Plugin_Name;
 
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
+
 use Plugin_Name\Admin\Main as Admin;
 use Plugin_Name\Front\Main as Front;
 
