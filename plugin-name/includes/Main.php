@@ -17,7 +17,7 @@ final class Main {
 	 * Set the minimum required versions for the plugin.
 	 */
 	const PLUGIN_REQUIREMENTS = array(
-		'php_version' => '7.3',
+		'php_version' => '8.1',
 		'wp_version'  => '5.6',
 		'wc_version'  => '5.3',
 	);
