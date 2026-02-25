@@ -273,7 +273,7 @@ abstract class Assets {
 				$name                        = str_replace( '-', '_', $handle ) . '_params';
 				self::$wp_localize_scripts[] = $handle;
 				// Let plugins to filter the script data.
-				wp_localize_script( $handle, $name, apply_filters( $name, $data ) );
+				wp_localize_script( $handle, $name, apply_filters( 'plugin_name_script_data_' . $name, $data ) );
 			}
 		}
 	}

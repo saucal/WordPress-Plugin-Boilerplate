@@ -77,6 +77,10 @@ final class Template {
 		// Allow 3rd party plugin filter template file from their plugin.
 		$located = apply_filters( 'plugin_name_get_template', $located, $template_name, $args, $template_path, $default_path );
 
+		if ( ! file_exists( $located ) ) {
+			return;
+		}
+
 		// Perform other actions before template part is included.
 		do_action( 'plugin_name_before_template_part', $template_name, $template_path, $located, $args );
 
