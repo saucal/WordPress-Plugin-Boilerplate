@@ -1,0 +1,48 @@
+{
+	"name": "plugin-name",
+	"version": "1.0.0",
+	"description": "This is a short description of what the plugin does.",
+	"author": "SAU/CAL",
+	"license": "GPL-2.0-or-later",
+	"keywords": [
+		"wordpress",
+		"wordpress plugin"
+	],
+	"config": {
+		"webpack": {
+			"js": "src/js/",
+			"css": "src/sass/"
+		},
+		"wp_org_slug": "plugin-name",
+		"version_replace_paths": [
+			"includes",
+			"uninstall.php"
+		]
+	},
+	"scripts": {
+		"watch": "wp-scripts start",
+		"build:assets": "wp-scripts build",
+		"build:deps": "rm -rf vendor && composer install --no-dev --optimize-autoloader",
+		"build:makepot": "composer install && composer run makepot",
+		"build": "npm run build:assets && npm run build:makepot && npm run build:deps",
+		"format:js": "wp-scripts format ./src",
+		"lint:css": "wp-scripts lint-style \"./src/**/*.scss\"",
+		"lint:css:fix": "wp-scripts lint-style \"./src/**/*.scss\" --fix",
+		"lint:js": "wp-scripts lint-js ./src",
+		"lint:js:fix": "wp-scripts lint-js ./src --fix",
+		"lint:php": "composer run-script phpcs ./"
+	},
+	"devDependencies": {
+		"@wordpress/scripts": "^30.27.0",
+		"glob": "^10.3.0",
+		"webpack-remove-empty-scripts": "^1.0.0"
+	},
+	"stylelint": {
+		"extends": [
+			"@wordpress/stylelint-config/scss"
+		],
+		"rules": {
+			"no-descending-specificity": null
+		}
+	}
+}

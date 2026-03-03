@@ -1,10 +1,6 @@
 <?php
 /**
  * Handle admin hooks.
- *
- * @class       Admin
- * @version     1.0.0
- * @package     Plugin_Name/Classes/
  */
 
 namespace Plugin_Name\Admin;
@@ -27,7 +23,7 @@ final class Main {
 
 		Assets::hooks();
 
-		add_action( 'current_screen', array( __CLASS__, 'conditional_includes' ) );
+		add_action( 'current_screen', array( self::class, 'conditional_includes' ) );
 	}
 
 

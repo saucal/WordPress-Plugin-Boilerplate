@@ -1,10 +1,6 @@
 <?php
 /**
  * Handle Gutenberg blocks registration.
- *
- * @class       Block
- * @version     1.0.0
- * @package     Plugin_Name/Classes/
  */
 
 namespace Plugin_Name;
@@ -24,7 +20,7 @@ final class Block {
 	 * @return void
 	 */
 	public static function hooks() {
-		add_action( 'init', array( __CLASS__, 'register_blocks' ) );
+		add_action( 'init', array( self::class, 'register_blocks' ) );
 	}
 
 
@@ -57,6 +53,7 @@ final class Block {
 	 *
 	 * @param string $block Block name.
 	 * @param array  $args  Block arguments.
+	 *
 	 * @return void
 	 */
 	public static function register_admin( $block = '', $args = array() ) {
@@ -85,6 +82,7 @@ final class Block {
 	 *
 	 * @param string $block Block name.
 	 * @param array  $args  Block arguments.
+	 *
 	 * @return void
 	 */
 	public static function register( $block = '', $args = array() ) {

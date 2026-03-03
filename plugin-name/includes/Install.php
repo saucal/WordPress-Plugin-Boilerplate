@@ -1,10 +1,6 @@
 <?php
 /**
  * Handle plugin's install actions.
- *
- * @class       Install
- * @version     1.0.0
- * @package     Plugin_Name/Classes/
  */
 
 namespace Plugin_Name;
@@ -27,5 +23,17 @@ final class Install {
 
 		// Trigger action.
 		do_action( 'plugin_name_installed', $sitewide );
+	}
+
+
+	/**
+	 * Uninstall action.
+	 */
+	public static function uninstall( $sitewide = false ) {
+
+		// Perform uninstall actions here.
+
+		// Trigger action.
+		do_action( 'plugin_name_uninstalled', $sitewide );
 	}
 }

@@ -1,10 +1,6 @@
 <?php
 /**
- * Utility methods
- *
- * @class       Utils
- * @version     1.0.0
- * @package     Plugin_Name/Classes/
+ * Utility methods.
  */
 
 namespace Plugin_Name;
@@ -22,6 +18,7 @@ final class Utils {
 	 * What type of request is this?
 	 *
 	 * @param  string $type admin, ajax, cron or frontend.
+	 *
 	 * @return bool
 	 */
 	public static function is_request( $type ) {
@@ -30,11 +27,13 @@ final class Utils {
 			case 'admin':
 				return is_admin();
 			case 'ajax':
-				return defined( 'DOING_AJAX' ) && DOING_AJAX;
+				return wp_doing_ajax();
 			case 'cron':
-				return defined( 'DOING_CRON' ) && DOING_CRON;
+				return wp_doing_cron();
 			case 'frontend':
-				return ( ! is_admin() || ( defined( 'DOING_AJAX' ) && DOING_AJAX ) ) && ( ! defined( 'DOING_CRON' ) || ! DOING_CRON );
+				return ( ! is_admin() || wp_doing_ajax() ) && ! wp_doing_cron();
+			default:
+				return false;
 		}
 	}
 
